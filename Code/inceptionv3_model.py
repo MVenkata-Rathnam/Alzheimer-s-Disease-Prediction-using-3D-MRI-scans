@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  3 08:18:23 2018
-
-@author: Lenovo
-"""
-
-
 import keras
 import numpy as np
 from keras.applications import vgg16
@@ -44,10 +36,7 @@ validation_generator= validation_datagen.flow_from_directory(
         class_mode= 'categorical')
 
 
-base_model= keras.applications.vgg16.VGG16(weights= 'imagenet', include_top= False, input_shape=(img_height, img_width, 3
-                                                                                                ))
-#print(vgg_model.summary())
-#print(type(vgg_model))
+base_model= keras.applications.inception_v3.InceptionV3(weights= 'imagenet', include_top= False, input_shape=(img_height, img_width, 3))
 
 add_model= Sequential()
 add_model.add(Flatten(input_shape=base_model.output_shape[1:]))
