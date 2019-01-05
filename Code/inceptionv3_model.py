@@ -1,6 +1,5 @@
 import keras
 import numpy as np
-from keras.applications import vgg16
 from keras.models import Sequential, Model
 from keras.layers import Dense, Flatten
 from keras.preprocessing.image import ImageDataGenerator
@@ -14,7 +13,7 @@ batch_size = 32
 img_height = 208
 img_width = 176
 numClasses=4
-epoch=1
+epoch=10
 
 train_datagen= ImageDataGenerator(
         rescale= 1./255, 
@@ -40,7 +39,6 @@ base_model= keras.applications.inception_v3.InceptionV3(weights= 'imagenet', inc
 
 add_model= Sequential()
 add_model.add(Flatten(input_shape=base_model.output_shape[1:]))
-add_model.add(Dense(256, activation= 'relu'))
 add_model.add(Dense(4, activation='softmax'))
 
 model= Model(inputs= base_model.input, outputs=add_model(base_model.output))

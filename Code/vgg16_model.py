@@ -22,7 +22,7 @@ batch_size = 32
 img_height = 208
 img_width = 176
 numClasses=4
-epoch=1
+epoch=10
 
 train_datagen= ImageDataGenerator(
         rescale= 1./255, 
