@@ -18,11 +18,11 @@ from keras.optimizers import Adam
 train_data_dir = 'AlzheimerDataset/train/'
 validation_data_dir = 'AlzheimerDataset/test/'
 
-batch_size = 32
+batch_size = 16
 img_height = 208
 img_width = 176
 numClasses=4
-epoch=5
+epoch=10
 
 train_datagen= ImageDataGenerator(
         rescale= 1./255, 
@@ -60,12 +60,13 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizers.SGD(lr=1e-4,
 
 model.summary()
 
+steps_per_epoch = train_generator.n // batch_size
+validation_steps = validation_generator.n // batch_size
+
 model.fit_generator(train_generator,
         epochs=epoch,
         validation_data=validation_generator,
-        verbose=1,
+        verbose=1,	
+ 	steps_per_epoch=steps_per_epoch,
+	validation_steps=validation_steps
         )
-
-
-
-        
